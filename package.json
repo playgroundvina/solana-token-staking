@@ -2,8 +2,14 @@
   "name": "@mithraic-labs/token-staking",
   "version": "1.1.4",
   "description": "SPL Token staking TS package",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.es.js",
+  "exports": {
+        "types": "./dist/index.d.ts",
+        "require": "./dist/index.js",
+        "import": "./dist/index.es.js"
+    },
   "files": [
     "dist"
   ],
@@ -25,7 +31,6 @@
     "@coral-xyz/anchor": "^0.28.0",
     "@coral-xyz/spl-token": "^0.28.0",
     "@solana/spl-token": "^0.4.0",
-    "@solana/buffer-layout": "4.0.0",
     "bs58": "^5.0.0",
     "lodash.chunk": "^4.2.0"
   },
