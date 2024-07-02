@@ -151,9 +151,7 @@ export const fetchStakeReceiptsOfStakersWithinTimeFrame = async (
 ) => {
 	// allow 50 per fetchMultiple
 	const chunkedKeys = await fetchChunkedListOfStakeReceiptKeysWithinTimeFrame(program, stakePool, startTime, endTime);
-	const chunkedStakeReceipts: StakeDepositReceipt[][] = await Promise.all(
-		chunkedKeys.map((keys) => program.account.stakeDepositReceipt.fetchMultiple(keys))
-	);
+	const chunkedStakeReceipts = await Promise.all(chunkedKeys.map((keys) => program.account.stakeDepositReceipt.fetchMultiple(keys)));
 
 	return chunkedStakeReceipts;
 };
