@@ -1,36 +1,33 @@
 'use strict';
 
 var anchor = require('@coral-xyz/anchor');
-var splToken = require('@solana/spl-token');
-var splToken$1 = require('@coral-xyz/spl-token');
+var splToken = require('@coral-xyz/spl-token');
 var _chunk = require('lodash.chunk');
 var bs58 = require('bs58');
 
 function _interopNamespaceDefault(e) {
-  var n = Object.create(null);
-  if (e) {
-    Object.keys(e).forEach(function (k) {
-      if (k !== 'default') {
-        var d = Object.getOwnPropertyDescriptor(e, k);
-        Object.defineProperty(n, k, d.get ? d : {
-          enumerable: true,
-          get: function () { return e[k]; }
-        });
-      }
-    });
-  }
-  n.default = e;
-  return Object.freeze(n);
+	var n = Object.create(null);
+	if (e) {
+		Object.keys(e).forEach(function (k) {
+			if (k !== 'default') {
+				var d = Object.getOwnPropertyDescriptor(e, k);
+				Object.defineProperty(n, k, d.get ? d : {
+					enumerable: true,
+					get: function () { return e[k]; }
+				});
+			}
+		});
+	}
+	n.default = e;
+	return Object.freeze(n);
 }
 
 var anchor__namespace = /*#__PURE__*/_interopNamespaceDefault(anchor);
 
-const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [
-    210, 98, 254, 196, 151, 68, 235, 0,
-];
+const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [210, 98, 254, 196, 151, 68, 235, 0];
 const SPL_TOKEN_STAKING_ID = "AA9TGQNQuJks86HSJjXVWDAotvK8XKatRE9t2PXkLoGg";
 const STAKE_POOL_OWNER = "AL145KtKMxnRDfcruv61Kt4WL7FKtVYuqPA3nM8adWk";
-const TOKEN_PROGRAM_ID = splToken.TOKEN_PROGRAM_ID;
+const TOKEN_PROGRAM_ID = splToken.SPL_TOKEN_PROGRAM_ID;
 const RENT_PROGRAM_ID = anchor__namespace.web3.SYSVAR_RENT_PUBKEY;
 const SYSTEM_PROGRAM_ID = anchor__namespace.web3.SystemProgram.programId;
 
@@ -634,7 +631,7 @@ const initStakePool = async (program, mint, nonce = 0, lockupDuration = new anch
         stakeMint: stakeMintKey,
         mint,
         vault: vaultKey,
-        tokenProgram: splToken$1.SPL_TOKEN_PROGRAM_ID,
+        tokenProgram: splToken.SPL_TOKEN_PROGRAM_ID,
         rent: anchor__namespace.web3.SYSVAR_RENT_PUBKEY,
         systemProgram: anchor__namespace.web3.SystemProgram.programId,
     })
@@ -664,7 +661,7 @@ const addRewardPool = async (program, mint, nonce = 0, authority) => {
         stakePool: stakePoolKey,
         mint,
         rewardVault: rewardVaultKey,
-        tokenProgram: splToken$1.SPL_TOKEN_PROGRAM_ID,
+        tokenProgram: splToken.SPL_TOKEN_PROGRAM_ID,
         rent: anchor__namespace.web3.SYSVAR_RENT_PUBKEY,
         systemProgram: anchor__namespace.web3.SystemProgram.programId,
     })
@@ -695,7 +692,7 @@ const withdrawRewardPool = async (program, mint, nonce = 0, destination, amount,
         authority: _authority,
         stakePool: stakePoolKey,
         rewardVault: rewardVaultKey,
-        tokenProgram: splToken$1.SPL_TOKEN_PROGRAM_ID,
+        tokenProgram: splToken.SPL_TOKEN_PROGRAM_ID,
         destination: destination,
     })
         .rpc();
@@ -730,7 +727,7 @@ const createStakeBuilder = (program, payer, owner, stakePoolKey, from, stakeMint
         stakeMint,
         destination: stakeMintAccount,
         stakeDepositReceipt: stakeReceiptKey,
-        tokenProgram: splToken$1.SPL_TOKEN_PROGRAM_ID,
+        tokenProgram: splToken.SPL_TOKEN_PROGRAM_ID,
         rent: anchor__namespace.web3.SYSVAR_RENT_PUBKEY,
         systemProgram: anchor__namespace.web3.SystemProgram.programId,
     })

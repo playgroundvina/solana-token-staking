@@ -3,7 +3,7 @@ import _chunk from "lodash.chunk";
 import bs58 from "bs58";
 import { STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR } from "./constants";
 import { SplTokenStaking } from "./idl";
-import { StakeDepositReceipt, StakeDepositReceiptData } from "./types";
+import { StakeDepositReceiptData } from "./types";
 
 /**
  * Request all of a wallet's StakeDepositReceipts.

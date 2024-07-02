@@ -1,15 +1,12 @@
 import * as anchor from '@coral-xyz/anchor';
-import { TOKEN_PROGRAM_ID as TOKEN_PROGRAM_ID$1 } from '@solana/spl-token';
 import { SPL_TOKEN_PROGRAM_ID } from '@coral-xyz/spl-token';
 import _chunk from 'lodash.chunk';
 import bs58 from 'bs58';
 
-const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [
-    210, 98, 254, 196, 151, 68, 235, 0,
-];
+const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [210, 98, 254, 196, 151, 68, 235, 0];
 const SPL_TOKEN_STAKING_ID = "AA9TGQNQuJks86HSJjXVWDAotvK8XKatRE9t2PXkLoGg";
 const STAKE_POOL_OWNER = "AL145KtKMxnRDfcruv61Kt4WL7FKtVYuqPA3nM8adWk";
-const TOKEN_PROGRAM_ID = TOKEN_PROGRAM_ID$1;
+const TOKEN_PROGRAM_ID = SPL_TOKEN_PROGRAM_ID;
 const RENT_PROGRAM_ID = anchor.web3.SYSVAR_RENT_PUBKEY;
 const SYSTEM_PROGRAM_ID = anchor.web3.SystemProgram.programId;
 
