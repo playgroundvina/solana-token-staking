@@ -3,7 +3,7 @@ import _chunk from "lodash.chunk";
 import bs58 from "bs58";
 import { STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR } from "./constants";
 import { SplTokenStaking } from "./idl";
-import { StakeDepositReceiptData } from "./types";
+import { StakeDepositReceipt, StakeDepositReceiptData } from "./types";
 
 /**
  * Request all of a wallet's StakeDepositReceipts.
@@ -151,7 +151,9 @@ export const fetchStakeReceiptsOfStakersWithinTimeFrame = async (
 ) => {
 	// allow 50 per fetchMultiple
 	const chunkedKeys = await fetchChunkedListOfStakeReceiptKeysWithinTimeFrame(program, stakePool, startTime, endTime);
-	const chunkedStakeReceipts = await Promise.all(chunkedKeys.map((keys) => program.account.stakeDepositReceipt.fetchMultiple(keys)));
+	const chunkedStakeReceipts: StakeDepositReceipt[][] = await Promise.all(
+		chunkedKeys.map((keys) => program.account.stakeDepositReceipt.fetchMultiple(keys))
+	);
 
 	return chunkedStakeReceipts;
 };
