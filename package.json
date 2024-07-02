@@ -10,6 +10,7 @@
     "require": "./dist/index.js",
     "import": "./dist/index.es.js"
   },
+  "type": "module",
   "files": [
     "dist"
   ],

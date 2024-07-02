@@ -27,7 +27,9 @@ var anchor__namespace = /*#__PURE__*/_interopNamespaceDefault(anchor);
 const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [210, 98, 254, 196, 151, 68, 235, 0];
 const SPL_TOKEN_STAKING_ID = "AA9TGQNQuJks86HSJjXVWDAotvK8XKatRE9t2PXkLoGg";
 const STAKE_POOL_OWNER = "AL145KtKMxnRDfcruv61Kt4WL7FKtVYuqPA3nM8adWk";
-const TOKEN_PROGRAM_ID = splToken.SPL_TOKEN_PROGRAM_ID;
+const BUSAI_TOKEN_ID = "35h3ZFJRNk4AKygynKB9bnEuS72gPY4gfH95LvbM3GkU";
+const SSGT_TOKEN_ID = "5xFnVJeBJBevAorV5KtGDme71HwHJkrkDTLmW1sQFVX4";
+const TOKEN_PROGRAM_ID = new anchor__namespace.web3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 const RENT_PROGRAM_ID = anchor__namespace.web3.SYSVAR_RENT_PUBKEY;
 const SYSTEM_PROGRAM_ID = anchor__namespace.web3.SystemProgram.programId;
 
@@ -895,8 +897,10 @@ const fetchStakeReceiptsOfStakersWithinTimeFrame = async (program, stakePool, st
     return chunkedStakeReceipts;
 };
 
+exports.BUSAI_TOKEN_ID = BUSAI_TOKEN_ID;
 exports.RENT_PROGRAM_ID = RENT_PROGRAM_ID;
 exports.SPL_TOKEN_STAKING_ID = SPL_TOKEN_STAKING_ID;
+exports.SSGT_TOKEN_ID = SSGT_TOKEN_ID;
 exports.STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR;
 exports.STAKE_POOL_OWNER = STAKE_POOL_OWNER;
 exports.SYSTEM_PROGRAM_ID = SYSTEM_PROGRAM_ID;

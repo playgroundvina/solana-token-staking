@@ -6,7 +6,9 @@ import bs58 from 'bs58';
 const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [210, 98, 254, 196, 151, 68, 235, 0];
 const SPL_TOKEN_STAKING_ID = "AA9TGQNQuJks86HSJjXVWDAotvK8XKatRE9t2PXkLoGg";
 const STAKE_POOL_OWNER = "AL145KtKMxnRDfcruv61Kt4WL7FKtVYuqPA3nM8adWk";
-const TOKEN_PROGRAM_ID = SPL_TOKEN_PROGRAM_ID;
+const BUSAI_TOKEN_ID = "35h3ZFJRNk4AKygynKB9bnEuS72gPY4gfH95LvbM3GkU";
+const SSGT_TOKEN_ID = "5xFnVJeBJBevAorV5KtGDme71HwHJkrkDTLmW1sQFVX4";
+const TOKEN_PROGRAM_ID = new anchor.web3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 const RENT_PROGRAM_ID = anchor.web3.SYSVAR_RENT_PUBKEY;
 const SYSTEM_PROGRAM_ID = anchor.web3.SystemProgram.programId;
 
@@ -874,4 +876,4 @@ const fetchStakeReceiptsOfStakersWithinTimeFrame = async (program, stakePool, st
     return chunkedStakeReceipts;
 };
 
-export { RENT_PROGRAM_ID, SPL_TOKEN_STAKING_ID, STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR, STAKE_POOL_OWNER, SYSTEM_PROGRAM_ID, SplTokenStakingIDL, TOKEN_PROGRAM_ID, _SplTokenStakingIDL, addRewardPool, batchRequestStakeReceipts, createStakeBuilder, createStakeInstruction, deposit, fetchChunkedListOfStakeReceiptKeysWithinTimeFrame, fetchStakeReceiptsOfStakersWithinTimeFrame, getNextUnusedStakeReceiptNonce, initStakePool, withdrawRewardPool };
+export { BUSAI_TOKEN_ID, RENT_PROGRAM_ID, SPL_TOKEN_STAKING_ID, SSGT_TOKEN_ID, STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR, STAKE_POOL_OWNER, SYSTEM_PROGRAM_ID, SplTokenStakingIDL, TOKEN_PROGRAM_ID, _SplTokenStakingIDL, addRewardPool, batchRequestStakeReceipts, createStakeBuilder, createStakeInstruction, deposit, fetchChunkedListOfStakeReceiptKeysWithinTimeFrame, fetchStakeReceiptsOfStakersWithinTimeFrame, getNextUnusedStakeReceiptNonce, initStakePool, withdrawRewardPool };
