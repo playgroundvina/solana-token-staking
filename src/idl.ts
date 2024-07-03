@@ -68,6 +68,14 @@ export const _SplTokenStakingIDL = {
 					name: "profitRate",
 					type: "u64",
 				},
+				{
+					name: "minAmount",
+					type: "u64",
+				},
+				{
+					name: "maxAmount",
+					type: "u64",
+				},
 			],
 		},
 		{
@@ -441,14 +449,6 @@ export const _SplTokenStakingIDL = {
 						type: "publicKey",
 					},
 					{
-						name: "totalStake",
-						type: "u64",
-					},
-					{
-						name: "totalReward",
-						type: "u64",
-					},
-					{
 						name: "vault",
 						type: "publicKey",
 					},
@@ -465,11 +465,27 @@ export const _SplTokenStakingIDL = {
 						type: "publicKey",
 					},
 					{
+						name: "totalStake",
+						type: "u128",
+					},
+					{
+						name: "totalReward",
+						type: "u128",
+					},
+					{
 						name: "lockupDuration",
 						type: "u64",
 					},
 					{
 						name: "profitRate",
+						type: "u64",
+					},
+					{
+						name: "minAmount",
+						type: "u64",
+					},
+					{
+						name: "maxAmount",
 						type: "u64",
 					},
 					{
@@ -484,12 +500,6 @@ export const _SplTokenStakingIDL = {
 						name: "padding0",
 						type: {
 							array: ["u8", 6],
-						},
-					},
-					{
-						name: "reserved0",
-						type: {
-							array: ["u8", 256],
 						},
 					},
 				],
@@ -567,6 +577,16 @@ export const _SplTokenStakingIDL = {
 			code: 6006,
 			name: "StakeStillLocked",
 			msg: "Stake is still locked",
+		},
+		{
+			code: 6007,
+			name: "AmountMustGreater",
+			msg: "Amount must be greater than minimum",
+		},
+		{
+			code: 6008,
+			name: "AmountMustLess",
+			msg: "Amount must be less than maximum",
 		},
 	],
 } as const;
