@@ -7,10 +7,10 @@ import { SplTokenStaking } from "./idl";
  * @param program
  * @param mint
  * @param nonce
- * @param baseWeight
- * @param maxWeight
- * @param minDuration
- * @param maxDuration
+ * @param lockupDuration
+ * @param profitRate
+ * @param minAmount
+ * @param maxAmount
  * @param authority - defaults to `program.provider.publicKey`
  */
 export const initStakePool = async (
@@ -19,6 +19,8 @@ export const initStakePool = async (
 	nonce = 0,
 	lockupDuration = new anchor.BN(0),
 	profitRate = new anchor.BN(5),
+	minAmount = new anchor.BN(1_000_000_000),
+	maxAmount = new anchor.BN(100_000_000_000_000),
 	authority?: anchor.Address
 ) => {
 	const _authority = authority ? new anchor.web3.PublicKey(authority) : program.provider.publicKey;
@@ -34,7 +36,7 @@ export const initStakePool = async (
 	const [stakeMintKey] = anchor.web3.PublicKey.findProgramAddressSync([stakePoolKey.toBuffer(), Buffer.from("stakeMint", "utf-8")], program.programId);
 	const [vaultKey] = anchor.web3.PublicKey.findProgramAddressSync([stakePoolKey.toBuffer(), Buffer.from("vault", "utf-8")], program.programId);
 	await program.methods
-		.initializeStakePool(nonce, lockupDuration, profitRate)
+		.initializeStakePool(nonce, lockupDuration, profitRate, minAmount, maxAmount)
 		.accounts({
 			payer: program.provider.publicKey,
 			authority: _authority,

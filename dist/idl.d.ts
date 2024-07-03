@@ -52,6 +52,12 @@ export declare const _SplTokenStakingIDL: {
         }, {
             readonly name: "profitRate";
             readonly type: "u64";
+        }, {
+            readonly name: "minAmount";
+            readonly type: "u64";
+        }, {
+            readonly name: "maxAmount";
+            readonly type: "u64";
         }];
     }, {
         readonly name: "addRewardPool";
@@ -340,12 +346,6 @@ export declare const _SplTokenStakingIDL: {
                 readonly name: "authority";
                 readonly type: "publicKey";
             }, {
-                readonly name: "totalStake";
-                readonly type: "u64";
-            }, {
-                readonly name: "totalReward";
-                readonly type: "u64";
-            }, {
                 readonly name: "vault";
                 readonly type: "publicKey";
             }, {
@@ -358,10 +358,22 @@ export declare const _SplTokenStakingIDL: {
                 readonly name: "stakeMint";
                 readonly type: "publicKey";
             }, {
+                readonly name: "totalStake";
+                readonly type: "u128";
+            }, {
+                readonly name: "totalReward";
+                readonly type: "u128";
+            }, {
                 readonly name: "lockupDuration";
                 readonly type: "u64";
             }, {
                 readonly name: "profitRate";
+                readonly type: "u64";
+            }, {
+                readonly name: "minAmount";
+                readonly type: "u64";
+            }, {
+                readonly name: "maxAmount";
                 readonly type: "u64";
             }, {
                 readonly name: "nonce";
@@ -373,11 +385,6 @@ export declare const _SplTokenStakingIDL: {
                 readonly name: "padding0";
                 readonly type: {
                     readonly array: readonly ["u8", 6];
-                };
-            }, {
-                readonly name: "reserved0";
-                readonly type: {
-                    readonly array: readonly ["u8", 256];
                 };
             }];
         };
@@ -437,6 +444,14 @@ export declare const _SplTokenStakingIDL: {
         readonly code: 6006;
         readonly name: "StakeStillLocked";
         readonly msg: "Stake is still locked";
+    }, {
+        readonly code: 6007;
+        readonly name: "AmountMustGreater";
+        readonly msg: "Amount must be greater than minimum";
+    }, {
+        readonly code: 6008;
+        readonly name: "AmountMustLess";
+        readonly msg: "Amount must be less than maximum";
     }];
 };
 export declare const SplTokenStakingIDL: Mutable<typeof _SplTokenStakingIDL>;

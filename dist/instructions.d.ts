@@ -5,13 +5,13 @@ import { SplTokenStaking } from "./idl";
  * @param program
  * @param mint
  * @param nonce
- * @param baseWeight
- * @param maxWeight
- * @param minDuration
- * @param maxDuration
+ * @param lockupDuration
+ * @param profitRate
+ * @param minAmount
+ * @param maxAmount
  * @param authority - defaults to `program.provider.publicKey`
  */
-export declare const initStakePool: (program: anchor.Program<SplTokenStaking>, mint: anchor.Address, nonce?: number, lockupDuration?: any, profitRate?: any, authority?: anchor.Address) => Promise<void>;
+export declare const initStakePool: (program: anchor.Program<SplTokenStaking>, mint: anchor.Address, nonce?: number, lockupDuration?: any, profitRate?: any, minAmount?: any, maxAmount?: any, authority?: anchor.Address) => Promise<void>;
 /**
  * addRewardPool and set configuration parameters.
  * @param program
@@ -94,6 +94,12 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
             type: "u64";
         }, {
             name: "profitRate";
+            type: "u64";
+        }, {
+            name: "minAmount";
+            type: "u64";
+        }, {
+            name: "maxAmount";
             type: "u64";
         }];
     }, {
@@ -383,12 +389,6 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
                 name: "authority";
                 type: "publicKey";
             }, {
-                name: "totalStake";
-                type: "u64";
-            }, {
-                name: "totalReward";
-                type: "u64";
-            }, {
                 name: "vault";
                 type: "publicKey";
             }, {
@@ -401,10 +401,22 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
                 name: "stakeMint";
                 type: "publicKey";
             }, {
+                name: "totalStake";
+                type: "u128";
+            }, {
+                name: "totalReward";
+                type: "u128";
+            }, {
                 name: "lockupDuration";
                 type: "u64";
             }, {
                 name: "profitRate";
+                type: "u64";
+            }, {
+                name: "minAmount";
+                type: "u64";
+            }, {
+                name: "maxAmount";
                 type: "u64";
             }, {
                 name: "nonce";
@@ -416,11 +428,6 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
                 name: "padding0";
                 type: {
                     array: ["u8", 6];
-                };
-            }, {
-                name: "reserved0";
-                type: {
-                    array: ["u8", 256];
                 };
             }];
         };
@@ -480,6 +487,14 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
         code: 6006;
         name: "StakeStillLocked";
         msg: "Stake is still locked";
+    }, {
+        code: 6007;
+        name: "AmountMustGreater";
+        msg: "Amount must be greater than minimum";
+    }, {
+        code: 6008;
+        name: "AmountMustLess";
+        msg: "Amount must be less than maximum";
     }];
 }, {
     name: "deposit";

@@ -99,6 +99,14 @@ const _SplTokenStakingIDL = {
                     name: "profitRate",
                     type: "u64",
                 },
+                {
+                    name: "minAmount",
+                    type: "u64",
+                },
+                {
+                    name: "maxAmount",
+                    type: "u64",
+                },
             ],
         },
         {
@@ -472,14 +480,6 @@ const _SplTokenStakingIDL = {
                         type: "publicKey",
                     },
                     {
-                        name: "totalStake",
-                        type: "u64",
-                    },
-                    {
-                        name: "totalReward",
-                        type: "u64",
-                    },
-                    {
                         name: "vault",
                         type: "publicKey",
                     },
@@ -496,11 +496,27 @@ const _SplTokenStakingIDL = {
                         type: "publicKey",
                     },
                     {
+                        name: "totalStake",
+                        type: "u128",
+                    },
+                    {
+                        name: "totalReward",
+                        type: "u128",
+                    },
+                    {
                         name: "lockupDuration",
                         type: "u64",
                     },
                     {
                         name: "profitRate",
+                        type: "u64",
+                    },
+                    {
+                        name: "minAmount",
+                        type: "u64",
+                    },
+                    {
+                        name: "maxAmount",
                         type: "u64",
                     },
                     {
@@ -515,12 +531,6 @@ const _SplTokenStakingIDL = {
                         name: "padding0",
                         type: {
                             array: ["u8", 6],
-                        },
-                    },
-                    {
-                        name: "reserved0",
-                        type: {
-                            array: ["u8", 256],
                         },
                     },
                 ],
@@ -599,6 +609,16 @@ const _SplTokenStakingIDL = {
             name: "StakeStillLocked",
             msg: "Stake is still locked",
         },
+        {
+            code: 6007,
+            name: "AmountMustGreater",
+            msg: "Amount must be greater than minimum",
+        },
+        {
+            code: 6008,
+            name: "AmountMustLess",
+            msg: "Amount must be less than maximum",
+        },
     ],
 };
 const SplTokenStakingIDL = _SplTokenStakingIDL;
@@ -608,13 +628,13 @@ const SplTokenStakingIDL = _SplTokenStakingIDL;
  * @param program
  * @param mint
  * @param nonce
- * @param baseWeight
- * @param maxWeight
- * @param minDuration
- * @param maxDuration
+ * @param lockupDuration
+ * @param profitRate
+ * @param minAmount
+ * @param maxAmount
  * @param authority - defaults to `program.provider.publicKey`
  */
-const initStakePool = async (program, mint, nonce = 0, lockupDuration = new anchor__namespace.BN(0), profitRate = new anchor__namespace.BN(5), authority) => {
+const initStakePool = async (program, mint, nonce = 0, lockupDuration = new anchor__namespace.BN(0), profitRate = new anchor__namespace.BN(5), minAmount = new anchor__namespace.BN(1_000_000_000), maxAmount = new anchor__namespace.BN(100_000_000_000_000), authority) => {
     const _authority = authority ? new anchor__namespace.web3.PublicKey(authority) : program.provider.publicKey;
     const [stakePoolKey] = anchor__namespace.web3.PublicKey.findProgramAddressSync([
         new anchor__namespace.BN(nonce).toArrayLike(Buffer, "le", 1),
@@ -625,7 +645,7 @@ const initStakePool = async (program, mint, nonce = 0, lockupDuration = new anch
     const [stakeMintKey] = anchor__namespace.web3.PublicKey.findProgramAddressSync([stakePoolKey.toBuffer(), Buffer.from("stakeMint", "utf-8")], program.programId);
     const [vaultKey] = anchor__namespace.web3.PublicKey.findProgramAddressSync([stakePoolKey.toBuffer(), Buffer.from("vault", "utf-8")], program.programId);
     await program.methods
-        .initializeStakePool(nonce, lockupDuration, profitRate)
+        .initializeStakePool(nonce, lockupDuration, profitRate, minAmount, maxAmount)
         .accounts({
         payer: program.provider.publicKey,
         authority: _authority,
