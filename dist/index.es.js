@@ -4,7 +4,7 @@ import _chunk from 'lodash.chunk';
 import bs58 from 'bs58';
 
 const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [210, 98, 254, 196, 151, 68, 235, 0];
-const SPL_TOKEN_STAKING_ID = "AA9TGQNQuJks86HSJjXVWDAotvK8XKatRE9t2PXkLoGg";
+const SPL_TOKEN_STAKING_ID = "Fx31Ua2enQpVqrjf3TbUCuSinHUr98xGwW36eAREUX1R";
 const STAKE_POOL_OWNER = "AL145KtKMxnRDfcruv61Kt4WL7FKtVYuqPA3nM8adWk";
 const BUSAI_TOKEN_ID = "35h3ZFJRNk4AKygynKB9bnEuS72gPY4gfH95LvbM3GkU";
 const SSGT_TOKEN_ID = "5xFnVJeBJBevAorV5KtGDme71HwHJkrkDTLmW1sQFVX4";
@@ -14,7 +14,7 @@ const SYSTEM_PROGRAM_ID = anchor.web3.SystemProgram.programId;
 
 const _SplTokenStakingIDL = {
     version: "1.1.2",
-    name: "ssgt_token_staking",
+    name: "spl_token_staking",
     instructions: [
         {
             name: "initializeStakePool",

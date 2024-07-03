@@ -3,7 +3,7 @@ type Mutable<T> = {
 };
 export declare const _SplTokenStakingIDL: {
     readonly version: "1.1.2";
-    readonly name: "ssgt_token_staking";
+    readonly name: "spl_token_staking";
     readonly instructions: readonly [{
         readonly name: "initializeStakePool";
         readonly accounts: readonly [{
