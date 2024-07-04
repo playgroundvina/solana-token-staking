@@ -249,6 +249,11 @@ const _SplTokenStakingIDL = {
                     isSigner: false,
                 },
                 {
+                    name: "stakeDepositCounter",
+                    isMut: true,
+                    isSigner: false,
+                },
+                {
                     name: "tokenProgram",
                     isMut: false,
                     isSigner: false,
@@ -551,6 +556,30 @@ const _SplTokenStakingIDL = {
                 ],
             },
         },
+        {
+            name: "stakeDepositCounter",
+            type: {
+                kind: "struct",
+                fields: [
+                    {
+                        name: "owner",
+                        type: "publicKey",
+                    },
+                    {
+                        name: "payer",
+                        type: "publicKey",
+                    },
+                    {
+                        name: "stakePool",
+                        type: "publicKey",
+                    },
+                    {
+                        name: "stakedAmount",
+                        type: "u64",
+                    },
+                ],
+            },
+        },
     ],
     errors: [
         {
@@ -596,7 +625,7 @@ const _SplTokenStakingIDL = {
         {
             code: 6008,
             name: "AmountMustLess",
-            msg: "Amount must be less than maximum",
+            msg: "Total stake amount must be less than maximum",
         },
     ],
 };

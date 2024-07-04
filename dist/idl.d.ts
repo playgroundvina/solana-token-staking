@@ -184,6 +184,10 @@ export declare const _SplTokenStakingIDL: {
             readonly isMut: true;
             readonly isSigner: false;
         }, {
+            readonly name: "stakeDepositCounter";
+            readonly isMut: true;
+            readonly isSigner: false;
+        }, {
             readonly name: "tokenProgram";
             readonly isMut: false;
             readonly isSigner: false;
@@ -415,6 +419,24 @@ export declare const _SplTokenStakingIDL: {
                 readonly type: "u64";
             }];
         };
+    }, {
+        readonly name: "stakeDepositCounter";
+        readonly type: {
+            readonly kind: "struct";
+            readonly fields: readonly [{
+                readonly name: "owner";
+                readonly type: "publicKey";
+            }, {
+                readonly name: "payer";
+                readonly type: "publicKey";
+            }, {
+                readonly name: "stakePool";
+                readonly type: "publicKey";
+            }, {
+                readonly name: "stakedAmount";
+                readonly type: "u64";
+            }];
+        };
     }];
     readonly errors: readonly [{
         readonly code: 6000;
@@ -451,7 +473,7 @@ export declare const _SplTokenStakingIDL: {
     }, {
         readonly code: 6008;
         readonly name: "AmountMustLess";
-        readonly msg: "Amount must be less than maximum";
+        readonly msg: "Total stake amount must be less than maximum";
     }];
 };
 export declare const SplTokenStakingIDL: Mutable<typeof _SplTokenStakingIDL>;
