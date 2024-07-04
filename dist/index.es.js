@@ -4,7 +4,7 @@ import _chunk from 'lodash.chunk';
 import bs58 from 'bs58';
 
 const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [210, 98, 254, 196, 151, 68, 235, 0];
-const SPL_TOKEN_STAKING_ID = "ApYYzSeuyvj4n18V7x6cwW3Pa8UmHta8HUcD2tp1aCWi";
+const SPL_TOKEN_STAKING_ID = "F7ansLaZ1fcLLzXjSEyCtGPqVN4zhtGtfUEaHwAk7Ts6";
 const STAKE_POOL_OWNER = "AL145KtKMxnRDfcruv61Kt4WL7FKtVYuqPA3nM8adWk";
 const BUSAI_TOKEN_ID = "35h3ZFJRNk4AKygynKB9bnEuS72gPY4gfH95LvbM3GkU";
 const SSGT_TOKEN_ID = "5xFnVJeBJBevAorV5KtGDme71HwHJkrkDTLmW1sQFVX4";
