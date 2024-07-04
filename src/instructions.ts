@@ -162,6 +162,11 @@ export const createStakeBuilder = (
 		program.programId
 	);
 
+	const [stakeCounterKey] = anchor.web3.PublicKey.findProgramAddressSync(
+		[owner.toBuffer(), _stakePoolKey.toBuffer(), Buffer.from("stakeDepositReceipt", "utf-8")],
+		program.programId
+	);
+
 	return program.methods
 		.deposit(receiptNonce, amount)
 		.accounts({
@@ -173,6 +178,7 @@ export const createStakeBuilder = (
 			stakeMint,
 			destination: stakeMintAccount,
 			stakeDepositReceipt: stakeReceiptKey,
+			stakeDepositCounter: stakeCounterKey,
 			tokenProgram: SPL_TOKEN_PROGRAM_ID,
 			rent: anchor.web3.SYSVAR_RENT_PUBKEY,
 			systemProgram: anchor.web3.SystemProgram.programId,
