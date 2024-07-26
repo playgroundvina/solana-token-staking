@@ -46,7 +46,7 @@ export declare const withdrawRewardPool: (program: anchor.Program<SplTokenStakin
  */
 export declare const createStakeBuilder: (program: anchor.Program<SplTokenStaking>, payer: anchor.web3.PublicKey, owner: anchor.web3.PublicKey, stakePoolKey: anchor.Address, from: anchor.Address, stakeMintAccount: anchor.Address, amount: anchor.BN, receiptNonce: number, rewardVaultKey: anchor.web3.PublicKey) => import("@coral-xyz/anchor/dist/cjs/program/namespace/methods").MethodsBuilder<{
     version: "1.1.2";
-    name: "ssgt_token_staking";
+    name: "spl_token_staking";
     instructions: [{
         name: "initializeStakePool";
         accounts: [{
@@ -224,6 +224,10 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
             isSigner: false;
         }, {
             name: "stakeDepositReceipt";
+            isMut: true;
+            isSigner: false;
+        }, {
+            name: "stakeDepositCounter";
             isMut: true;
             isSigner: false;
         }, {
@@ -458,6 +462,24 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
                 type: "u64";
             }];
         };
+    }, {
+        name: "stakeDepositCounter";
+        type: {
+            kind: "struct";
+            fields: [{
+                name: "owner";
+                type: "publicKey";
+            }, {
+                name: "payer";
+                type: "publicKey";
+            }, {
+                name: "stakePool";
+                type: "publicKey";
+            }, {
+                name: "stakedAmount";
+                type: "u64";
+            }];
+        };
     }];
     errors: [{
         code: 6000;
@@ -494,7 +516,7 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
     }, {
         code: 6008;
         name: "AmountMustLess";
-        msg: "Amount must be less than maximum";
+        msg: "Total stake amount must be less than maximum";
     }];
 }, {
     name: "deposit";
@@ -528,6 +550,10 @@ export declare const createStakeBuilder: (program: anchor.Program<SplTokenStakin
         isSigner: false;
     }, {
         name: "stakeDepositReceipt";
+        isMut: true;
+        isSigner: false;
+    }, {
+        name: "stakeDepositCounter";
         isMut: true;
         isSigner: false;
     }, {

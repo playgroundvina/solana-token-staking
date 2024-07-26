@@ -25,10 +25,16 @@ function _interopNamespaceDefault(e) {
 var anchor__namespace = /*#__PURE__*/_interopNamespaceDefault(anchor);
 
 const STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = [210, 98, 254, 196, 151, 68, 235, 0];
+// DEVNET CONSTANTS
 const SPL_TOKEN_STAKING_ID = "F7ansLaZ1fcLLzXjSEyCtGPqVN4zhtGtfUEaHwAk7Ts6";
 const STAKE_POOL_OWNER = "AL145KtKMxnRDfcruv61Kt4WL7FKtVYuqPA3nM8adWk";
 const BUSAI_TOKEN_ID = "35h3ZFJRNk4AKygynKB9bnEuS72gPY4gfH95LvbM3GkU";
 const SSGT_TOKEN_ID = "5xFnVJeBJBevAorV5KtGDme71HwHJkrkDTLmW1sQFVX4";
+// MAINNET CONSTANTS
+const SPL_TOKEN_STAKING_ID_MAINNET = "";
+const STAKE_POOL_OWNER_MAINNET = "";
+const BUSAI_TOKEN_ID_MAINNET = "";
+const SSGT_TOKEN_ID_MAINNET = "";
 const TOKEN_PROGRAM_ID = new anchor__namespace.web3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 const RENT_PROGRAM_ID = anchor__namespace.web3.SYSVAR_RENT_PUBKEY;
 const SYSTEM_PROGRAM_ID = anchor__namespace.web3.SystemProgram.programId;
@@ -767,6 +773,7 @@ const createStakeBuilder = (program, payer, owner, stakePoolKey, from, stakeMint
     const [vaultKey] = anchor__namespace.web3.PublicKey.findProgramAddressSync([_stakePoolKey.toBuffer(), Buffer.from("vault", "utf-8")], program.programId);
     const [stakeMint] = anchor__namespace.web3.PublicKey.findProgramAddressSync([_stakePoolKey.toBuffer(), Buffer.from("stakeMint", "utf-8")], program.programId);
     const [stakeReceiptKey] = anchor__namespace.web3.PublicKey.findProgramAddressSync([owner.toBuffer(), _stakePoolKey.toBuffer(), new anchor__namespace.BN(receiptNonce).toArrayLike(Buffer, "le", 4), Buffer.from("stakeDepositReceipt", "utf-8")], program.programId);
+    const [stakeCounterKey] = anchor__namespace.web3.PublicKey.findProgramAddressSync([owner.toBuffer(), _stakePoolKey.toBuffer(), Buffer.from("stakeDepositReceipt", "utf-8")], program.programId);
     return program.methods
         .deposit(receiptNonce, amount)
         .accounts({
@@ -778,6 +785,7 @@ const createStakeBuilder = (program, payer, owner, stakePoolKey, from, stakeMint
         stakeMint,
         destination: stakeMintAccount,
         stakeDepositReceipt: stakeReceiptKey,
+        stakeDepositCounter: stakeCounterKey,
         tokenProgram: splToken.SPL_TOKEN_PROGRAM_ID,
         rent: anchor__namespace.web3.SYSVAR_RENT_PUBKEY,
         systemProgram: anchor__namespace.web3.SystemProgram.programId,
@@ -947,11 +955,15 @@ const fetchStakeReceiptsOfStakersWithinTimeFrame = async (program, stakePool, st
 };
 
 exports.BUSAI_TOKEN_ID = BUSAI_TOKEN_ID;
+exports.BUSAI_TOKEN_ID_MAINNET = BUSAI_TOKEN_ID_MAINNET;
 exports.RENT_PROGRAM_ID = RENT_PROGRAM_ID;
 exports.SPL_TOKEN_STAKING_ID = SPL_TOKEN_STAKING_ID;
+exports.SPL_TOKEN_STAKING_ID_MAINNET = SPL_TOKEN_STAKING_ID_MAINNET;
 exports.SSGT_TOKEN_ID = SSGT_TOKEN_ID;
+exports.SSGT_TOKEN_ID_MAINNET = SSGT_TOKEN_ID_MAINNET;
 exports.STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR = STAKE_DEPOSIT_RECEIPT_DISCRIMINATOR;
 exports.STAKE_POOL_OWNER = STAKE_POOL_OWNER;
+exports.STAKE_POOL_OWNER_MAINNET = STAKE_POOL_OWNER_MAINNET;
 exports.SYSTEM_PROGRAM_ID = SYSTEM_PROGRAM_ID;
 exports.SplTokenStakingIDL = SplTokenStakingIDL;
 exports.TOKEN_PROGRAM_ID = TOKEN_PROGRAM_ID;
